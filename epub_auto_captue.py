@@ -237,7 +237,8 @@ class Capture:
             self.capture()
             root.after(100, self.process)
         else:
-            self.progress.set(100)
+            self.current_page.set(0)
+            self.progress.set(0)
             self.running = False
             print("All tasks completed.")
             messagebox.showinfo("Done", "All pages have been captured successfully!")
@@ -245,7 +246,7 @@ class Capture:
     def capture(self):
         if not self.running:
             return
-        filename = f"{self.name}_{self.count}.png"
+        filename = f"{self.name}_{str(self.count).zfill(3)}.png"
         # Ensure save path is valid
         if not os.path.isdir(self.save_dir):
             print(f"Invalid save directory: {self.save_dir}")
